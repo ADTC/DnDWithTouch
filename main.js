@@ -87,9 +87,9 @@ window.onload = function () {
 
     function handleTouchMove(e) {
         var touchLocation = e.targetTouches[0];
-        var pageX = Math.round(touchLocation.pageX - 50);
-        var pageY = Math.round(touchLocation.pageY - 50);
-        _('app_status').innerHTML = "Touch " + pageX + "px, " + pageY + "px";
+        var pageX = Math.round(touchLocation.pageX - 50) + "px";
+        var pageY = Math.round(touchLocation.pageY - 50) + "px";
+        _('app_status').innerHTML = "Touch " + pageX + ", " + pageY;
         e.target.style.position = "absolute";
         e.target.style.left = pageX;
         e.target.style.top = pageY;
