@@ -6,33 +6,33 @@ var droppedIn = false;
 
 window.onload = function () {
     // Drag zone functionality
-    var dropZone = _('drop_zone');
+    var dropZone1 = _('drop_zone1');
 
-    dropZone.addEventListener('dragenter', handleDragEnter, false);
-    dropZone.addEventListener('dragleave', handleDragLeave, false);
-    dropZone.addEventListener('drop', handleDragDrop, false);
+    dropZone1.addEventListener('dragenter', handleDragEnter, false);
+    dropZone1.addEventListener('dragleave', handleDragLeave, false);
+    dropZone1.addEventListener('drop', handleDragDrop, false);
+    dropZone1.ondragover = function() { return false; };
+
+    var dropZone2 = _('drop_zone2');
+
+    dropZone2.addEventListener('dragenter', handleDragEnter, false);
+    dropZone2.addEventListener('dragleave', handleDragLeave, false);
+    dropZone2.addEventListener('drop', handleDragDrop, false);
+    dropZone2.ondragover = function() { return false; };
 
     function handleDragEnter(e) {
-        _('app_status').innerHTML = "You are dragging over the " + e
-            .target
-            .getAttribute('id');
+        _('app_status').innerHTML = "You are dragging over the " + e.target.getAttribute('id');
     }
 
     function handleDragLeave(e) {
-        _('app_status').innerHTML = "You left the " + e
-            .target
-            .getAttribute('id');
+        _('app_status').innerHTML = "You left the " + e.target.getAttribute('id');
     }
 
     function handleDragDrop(e) {
         e.preventDefault();
-        var element_id = e
-            .dataTransfer
-            .getData("text");
-        e
-            .target
-            .appendChild(_(element_id));
-        _(element_id).removeAttribute("draggable")
+        var element_id = e.dataTransfer.getData("text");
+        e.target.appendChild(_(element_id));
+//        _(element_id).removeAttribute("draggable")
         _(element_id).style.cursor = "default";
         droppedIn = true;
         _('app_status').innerHTML = "You droped " + element_id + " into drop zone";
@@ -66,28 +66,20 @@ window.onload = function () {
     object3.addEventListener('touchend', handleTouchEnd, false);
 
     function handleDragStart(e) {
-        _('app_status').innerHTML = "Dragging the element " + e
-            .target
-            .getAttribute('id');
+        _('app_status').innerHTML = "Dragging the element " + e.target.getAttribute('id');
         e.dataTransfer.dropEffect = "move";
-        e
-            .dataTransfer
-            .setData("text", e.target.getAttribute('id'));
+        e.dataTransfer.setData("text", e.target.getAttribute('id'));
     }
 
     function handleDragEnd(e) {
         if (droppedIn == false) {
-            _('app_status').innerHTML = "You let the " + e
-                .target
-                .getAttribute('id') + " go.";
+            _('app_status').innerHTML = "You let the " + e.target.getAttribute('id') + " go.";
         }
         droppedIn = false;
     }
 
     function handleTouchStart(e) {
-        _('app_status').innerHTML = "Touch start with element " + e
-            .target
-            .getAttribute('id');
+        _('app_status').innerHTML = "Touch start with element " + e.target.getAttribute('id');
         originalX = (e.target.offsetLeft - 10) + "px";
         originalY = (e.target.offsetTop - 10) + "px";
         activeEvent = 'start';
@@ -114,15 +106,11 @@ window.onload = function () {
                 dropZone.appendChild(e.target);
                 e.target.style.position = "initial";
                 droppedIn = true;
-                _('app_status').innerHTML = "You droped " + e
-                    .target
-                    .getAttribute('id') + " into drop zone";
+                _('app_status').innerHTML = "You droped " + e.target.getAttribute('id') + " into drop zone";
             } else {
                 e.target.style.left = originalX;
                 e.target.style.top = originalY;
-                _('app_status').innerHTML = "You let the " + e
-                    .target
-                    .getAttribute('id') + " go.";
+                _('app_status').innerHTML = "You let the " + e.target.getAttribute('id') + " go.";
             }
         }
     }
