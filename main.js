@@ -11,14 +11,14 @@ window.onload = function () {
     dropZone1.addEventListener('dragenter', handleDragEnter, false);
     dropZone1.addEventListener('dragleave', handleDragLeave, false);
     dropZone1.addEventListener('drop', handleDragDrop, false);
-    dropZone1.ondragover = function() { return false; };
+//    dropZone1.ondragover = function() { return false; };
 
     var dropZone2 = _('drop_zone2');
 
     dropZone2.addEventListener('dragenter', handleDragEnter, false);
     dropZone2.addEventListener('dragleave', handleDragLeave, false);
     dropZone2.addEventListener('drop', handleDragDrop, false);
-    dropZone2.ondragover = function() { return false; };
+//    dropZone2.ondragover = function() { return false; };
 
     function handleDragEnter(e) {
         _('app_status').innerHTML = "You are dragging over the " + e.target.getAttribute('id');
