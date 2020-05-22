@@ -11,14 +11,14 @@ window.onload = function () {
     dropZone1.addEventListener('dragenter', handleDragEnter, false);
     dropZone1.addEventListener('dragleave', handleDragLeave, false);
     dropZone1.addEventListener('drop', handleDragDrop, false);
-//    dropZone1.ondragover = function() { return false; };
+    dropZone1.ondragover = function() { return false; };
 
     var dropZone2 = _('drop_zone2');
 
     dropZone2.addEventListener('dragenter', handleDragEnter, false);
     dropZone2.addEventListener('dragleave', handleDragLeave, false);
     dropZone2.addEventListener('drop', handleDragDrop, false);
-//    dropZone2.ondragover = function() { return false; };
+    dropZone2.ondragover = function() { return false; };
 
     function handleDragEnter(e) {
         _('app_status').innerHTML = "You are dragging over the " + e.target.getAttribute('id');
@@ -102,17 +102,35 @@ window.onload = function () {
             var pageX = (parseInt(e.target.style.left) - 50);
             var pageY = (parseInt(e.target.style.top) - 50);
 
-            if (detectTouchEnd(dropZone.offsetLeft, dropZone.offsetTop, pageX, pageY, dropZone.offsetWidth, dropZone.offsetHeight)) {
-                dropZone.appendChild(e.target);
+            if (detectDropOn(dropZone1, pageX, pageY) {
+                dropZone1.appendChild(e.target);
                 e.target.style.position = "initial";
                 droppedIn = true;
-                _('app_status').innerHTML = "You droped " + e.target.getAttribute('id') + " into drop zone";
+                _('app_status').innerHTML = "You droped " + e.target.getAttribute('id') + " onto " + dropZone1.id;
+            } else if (detectDropOn(dropZone2, pageX, pageY) {
+                dropZone1.appendChild(e.target);
+                e.target.style.position = "initial";
+                droppedIn = true;
+                _('app_status').innerHTML = "You droped " + e.target.getAttribute('id') + " onto " + dropZone2.id;
             } else {
                 e.target.style.left = originalX;
                 e.target.style.top = originalY;
                 _('app_status').innerHTML = "You let the " + e.target.getAttribute('id') + " go.";
             }
         }
+    }
+
+    function detectDropOn(zone, x, y) {
+        var x1 = zone.offsetLeft;
+        var y1 = zone.offsetTop;
+        var w = zone.offsetWidth;
+        var h = zone.offsetHeight;
+        //Very simple detection here
+        if (x - x1 > w) 
+            return false;
+        if (y - y1 > h) 
+            return false;
+        return true;
     }
 
     function detectTouchEnd(x1, y1, x2, y2, w, h) {
