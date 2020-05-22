@@ -102,12 +102,12 @@ window.onload = function () {
             var pageX = (parseInt(e.target.style.left) - 50);
             var pageY = (parseInt(e.target.style.top) - 50);
 
-            if (detectDropOn(dropZone1, pageX, pageY) {
+            if (detectDropOn(dropZone1, pageX, pageY)) {
                 dropZone1.appendChild(e.target);
                 e.target.style.position = "initial";
                 droppedIn = true;
                 _('app_status').innerHTML = "You droped " + e.target.getAttribute('id') + " onto " + dropZone1.id;
-            } else if (detectDropOn(dropZone2, pageX, pageY) {
+            } else if (detectDropOn(dropZone2, pageX, pageY)) {
                 dropZone1.appendChild(e.target);
                 e.target.style.position = "initial";
                 droppedIn = true;
