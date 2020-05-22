@@ -35,7 +35,7 @@ window.onload = function () {
 //        _(element_id).removeAttribute("draggable")
         _(element_id).style.cursor = "default";
         droppedIn = true;
-        _('app_status').innerHTML = "You droped " + element_id + " into drop zone";
+        _('app_status').innerHTML = "You droped " + element_id + " onto " + e.target.id;
     }
 
     // Draggable element functionality
@@ -108,7 +108,7 @@ window.onload = function () {
                 droppedIn = true;
                 _('app_status').innerHTML = "You droped " + e.target.getAttribute('id') + " onto " + dropZone1.id;
             } else if (detectDropOn(dropZone2, pageX, pageY)) {
-                dropZone1.appendChild(e.target);
+                dropZone2.appendChild(e.target);
                 e.target.style.position = "initial";
                 droppedIn = true;
                 _('app_status').innerHTML = "You droped " + e.target.getAttribute('id') + " onto " + dropZone2.id;
