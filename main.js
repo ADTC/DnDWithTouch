@@ -35,7 +35,7 @@ window.onload = function () {
 //        _(element_id).removeAttribute("draggable")
         _(element_id).style.cursor = "default";
         droppedIn = true;
-        _('app_status').innerHTML = "You droped " + element_id + " onto " + e.target.id;
+        _('app_status').innerHTML = "You droped " + element_id + " onto " + e.target.getAttribute('id');
     }
 
     // Draggable element functionality
