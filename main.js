@@ -5,6 +5,16 @@ function _(id) {
 var droppedIn = false;
 
 window.onload = function () {
+    // A handly function to block event default and propagation
+    function block(e) {
+        try {
+            e.stopPropagation();
+            e.preventDefault();
+        } catch (exception) {
+            console.log(exception);
+        }
+    }
+
     // Drag zone functionality
     var dropZone1 = _('drop_zone1');
 
@@ -21,15 +31,17 @@ window.onload = function () {
     dropZone2.ondragover = function() { return false; };
 
     function handleDragEnter(e) {
+        block(e);
         _('app_status').innerHTML = "You are dragging over the " + e.target.getAttribute('id');
     }
 
     function handleDragLeave(e) {
+        block(e);
         _('app_status').innerHTML = "You left the " + e.target.getAttribute('id');
     }
 
     function handleDragDrop(e) {
-        e.preventDefault();
+        block(e);
         var element_id = e.dataTransfer.getData("text");
         e.target.appendChild(_(element_id));
 //        _(element_id).removeAttribute("draggable")
@@ -66,12 +78,14 @@ window.onload = function () {
     object3.addEventListener('touchend', handleTouchEnd, false);
 
     function handleDragStart(e) {
+        block(e);
         _('app_status').innerHTML = "Dragging the element " + e.target.getAttribute('id');
         e.dataTransfer.dropEffect = "move";
         e.dataTransfer.setData("text", e.target.getAttribute('id'));
     }
 
     function handleDragEnd(e) {
+        block(e);
         if (droppedIn == false) {
             _('app_status').innerHTML = "You let the " + e.target.getAttribute('id') + " go.";
         }
@@ -79,6 +93,7 @@ window.onload = function () {
     }
 
     function handleTouchStart(e) {
+        block(e);
         _('app_status').innerHTML = "Touch start with element " + e.target.getAttribute('id');
         originalX = (e.target.offsetLeft - 10) + "px";
         originalY = (e.target.offsetTop - 10) + "px";
@@ -86,6 +101,7 @@ window.onload = function () {
     }
 
     function handleTouchMove(e) {
+        block(e);
         var touchLocation = e.targetTouches[0];
         var pageX = Math.round(touchLocation.pageX - 50) + "px";
         var pageY = Math.round(touchLocation.pageY - 50) + "px";
@@ -97,7 +113,7 @@ window.onload = function () {
     }
 
     function handleTouchEnd(e) {
-        e.preventDefault();
+        block(e);
         if (activeEvent === 'move') {
             var pageX = (parseInt(e.target.style.left) - 50);
             var pageY = (parseInt(e.target.style.top) - 50);
