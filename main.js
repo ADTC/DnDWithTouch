@@ -103,8 +103,8 @@ window.onload = function () {
     function handleTouchMove(e) {
         block(e);
         var touchLocation = e.targetTouches[0];
-        var pageX = Math.round(touchLocation.pageX - 50) + "px";
-        var pageY = Math.round(touchLocation.pageY - 50) + "px";
+        var pageX = Math.round(touchLocation.pageX - 50);
+        var pageY = Math.round(touchLocation.pageY - 50);
         var dropText = "";
         if (detectDropOn(dropZone1, pageX, pageY)) {
             dropText = ", dropping on " + dropZone1.id;
@@ -113,8 +113,8 @@ window.onload = function () {
         }
         _('app_status').innerHTML = "Touch " + pageX + ", " + pageY + dropText;
         e.target.style.position = "absolute";
-        e.target.style.left = pageX;
-        e.target.style.top = pageY;
+        e.target.style.left = pageX + "px";
+        e.target.style.top = pageY + "px";
         activeEvent = 'move';
     }
 
