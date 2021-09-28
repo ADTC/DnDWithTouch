@@ -117,24 +117,25 @@ window.onload = function () {
         if (activeEvent === 'move') {
             var pageX = (parseInt(e.target.style.left) - 50);
             var pageY = (parseInt(e.target.style.top) - 50);
+            var coordText = " at " + pageX + ", " pageY;
 
             if (detectDropOn(dropZone1, pageX, pageY)) {
-                appendDropOn(dropZone1, e.target);
+                appendDropOn(dropZone1, e.target, coordText);
             } else if (detectDropOn(dropZone2, pageX, pageY)) {
-                appendDropOn(dropZone2, e.target);
+                appendDropOn(dropZone2, e.target, coordText);
             } else {
                 e.target.style.left = originalX;
                 e.target.style.top = originalY;
-                _('app_status').innerHTML = "You let the " + e.target.getAttribute('id') + " go.";
+                _('app_status').innerHTML = "You dropped " + e.target.getAttribute('id') + coordText;
             }
         }
     }
     
-    function appendDropOn(dropZone, target) {
+    function appendDropOn(dropZone, target, coordText) {
         dropZone.appendChild(target);
         target.style.position = "initial";
         droppedIn = true;
-        _('app_status').innerHTML = "You dropped " + target.getAttribute('id') + " onto " + dropZone.id;
+        _('app_status').innerHTML = "You dropped " + target.getAttribute('id') + " onto " + dropZone.id + coordText;
     }
 
     function detectDropOn(zone, x, y) {
