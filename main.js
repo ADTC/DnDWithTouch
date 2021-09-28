@@ -112,8 +112,8 @@ window.onload = function () {
         _('app_status').innerHTML = "Touch " + pageX + ", " + pageY + dropText;
         e.target.style.position = "absolute";
         var rect = e.target.getBoundingClientRect();
-        e.target.style.left = (pageX - (rect.width / 2)) + "px";
-        e.target.style.top = (pageY - (rect.height / 2)) + "px";
+        e.target.style.left = (pageX - (rect.width / 2) + window.pageXOffset) + "px";
+        e.target.style.top = (pageY - (rect.height / 2) + window.pageYOffset) + "px";
         activeEvent = 'move';
     }
 
