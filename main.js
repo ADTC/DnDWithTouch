@@ -156,7 +156,7 @@ window.onload = function () {
             returnvalue = false;
         if (y - y1 > h) 
             returnvalue = false;
-        if returnvalue {
+        if (returnvalue) {
             console.log(`${zone.id}, X: ${x} - ${x1} > ${w} = ${x - x1} > ${w} = ${x - x1 > w}`);
             console.log(`${zone.id}, Y: ${y} - ${y1} > ${h} = ${y - y1} > ${h} = ${y - y1 > h}`);
         }
