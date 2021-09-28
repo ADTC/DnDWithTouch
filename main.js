@@ -121,9 +121,9 @@ window.onload = function () {
     function handleTouchEnd(e) {
         block(e);
         if (activeEvent === 'move') {
-            var touchLocation = e.targetTouches[0];
-            var pageX = Math.round(touchLocation.pageX - 50);
-            var pageY = Math.round(touchLocation.pageY - 50);
+            // var touchLocation = e.targetTouches[0]; // apparently this doesn't exist here
+            var pageX = parseInt(e.target.style.left);
+            var pageY = parseInt(e.target.style.top);
             var coordText = " at " + pageX + ", " + pageY;
 
             if (detectDropOn(dropZone1, pageX, pageY)) {
