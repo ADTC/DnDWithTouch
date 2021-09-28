@@ -58,8 +58,6 @@ window.onload = function () {
     var object3 = _('object3');
 
     var activeEvent = '';
-    var originalX = '';
-    var originalY = '';
 
     object1.addEventListener('dragstart', handleDragStart, false);
     object1.addEventListener('dragend', handleDragEnd, false);
@@ -97,8 +95,6 @@ window.onload = function () {
     function handleTouchStart(e) {
         block(e);
         _('app_status').innerHTML = "Touch start with element " + e.target.getAttribute('id');
-        originalX = (e.target.offsetLeft - 10) + "px";
-        originalY = (e.target.offsetTop - 10) + "px";
         activeEvent = 'start';
     }
 
@@ -115,8 +111,9 @@ window.onload = function () {
         }
         _('app_status').innerHTML = "Touch " + pageX + ", " + pageY + dropText;
         e.target.style.position = "absolute";
-        e.target.style.left = pageX + "px";
-        e.target.style.top = pageY + "px";
+        var rect = e.target.getBoundingClientRect();
+        e.target.style.left = (pageX - (rect.width / 2)) + "px";
+        e.target.style.top = (pageY - (rect.height / 2)) + "px";
         activeEvent = 'move';
     }
 
@@ -131,8 +128,7 @@ window.onload = function () {
             } else if (detectDropOn(dropZone2, pageX, pageY)) {
                 appendDropOn(dropZone2, e.target, coordText);
             } else {
-                e.target.style.left = originalX;
-                e.target.style.top = originalY;
+                e.target.style.position = "static";
                 _('app_status').innerHTML = "You dropped " + e.target.getAttribute('id') + coordText;
             }
         }
