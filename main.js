@@ -151,14 +151,12 @@ window.onload = function () {
         var w = zone.offsetWidth;
         var h = zone.offsetHeight;
         //Very simple detection here
-        var returnvalue = true;
-        if (x - x1 > w) 
-            returnvalue = false;
-        if (y - y1 > h) 
-            returnvalue = false;
+        var returnvalue = false;
+        if (x1 <= x && y1 <= y && x <= (x1+w) && y <= (y1+h)) {
+            returnvalue = true;
+        }
         if (returnvalue) {
-            console.log(`${zone.id}, X: ${x} - ${x1} > ${w} = ${x - x1} > ${w} = ${x - x1 > w}`);
-            console.log(`${zone.id}, Y: ${y} - ${y1} > ${h} = ${y - y1} > ${h} = ${y - y1 > h}`);
+            console.log(`${zone.id}: ${x1} <= ${x} && ${y1} <= ${y} && ${x} <= ${x1+w} && ${y} <= ${y1+h}`);
         }
         return returnvalue;
     }
