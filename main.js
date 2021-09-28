@@ -3,6 +3,8 @@ function _(id) {
 }
 
 var droppedIn = false;
+var pageX = 0;
+var pageY = 0;
 
 window.onload = function () {
     // A handly function to block event default and propagation
@@ -103,8 +105,8 @@ window.onload = function () {
     function handleTouchMove(e) {
         block(e);
         var touchLocation = e.targetTouches[0];
-        var pageX = Math.round(touchLocation.pageX - 50);
-        var pageY = Math.round(touchLocation.pageY - 50);
+        pageX = Math.round(touchLocation.clientX);
+        pageY = Math.round(touchLocation.clientY);
         var dropText = "";
         if (detectDropOn(dropZone1, pageX, pageY)) {
             dropText = ", dropping on " + dropZone1.id;
@@ -122,8 +124,6 @@ window.onload = function () {
         block(e);
         if (activeEvent === 'move') {
             // var touchLocation = e.targetTouches[0]; // apparently this doesn't exist here
-            var pageX = parseInt(e.target.style.left);
-            var pageY = parseInt(e.target.style.top);
             var coordText = " at " + pageX + ", " + pageY;
 
             if (detectDropOn(dropZone1, pageX, pageY)) {
@@ -146,17 +146,18 @@ window.onload = function () {
     }
 
     function detectDropOn(zone, x, y) {
-        var x1 = zone.offsetLeft;
-        var y1 = zone.offsetTop;
-        var w = zone.offsetWidth;
-        var h = zone.offsetHeight;
+        var rect = zone.getBoundingClientRect();
+        var x1 = rect.left;
+        var y1 = rect.top;
+        var x2 = rect.right;
+        var y2 = rect.bottom;
         //Very simple detection here
         var returnvalue = false;
-        if (x1 <= x && y1 <= y && x <= (x1+w) && y <= (y1+h)) {
+        if (x1 <= x && y1 <= y && x <= x2 && y <= y2) {
             returnvalue = true;
         }
         if (returnvalue) {
-            console.log(`${zone.id}: ${x1} <= ${x} && ${y1} <= ${y} && ${x} <= ${x1+w} && ${y} <= ${y1+h}`);
+            console.log(`${zone.id}: ${x1} <= ${x} && ${y1} <= ${y} && ${x} <= ${x2} && ${y} <= ${y2}`);
         }
         return returnvalue;
     }
