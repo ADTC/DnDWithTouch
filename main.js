@@ -78,7 +78,7 @@ window.onload = function () {
     object3.addEventListener('touchend', handleTouchEnd, false);
 
     function handleDragStart(e) {
-        block(e);
+        // block(e);
         _('app_status').innerHTML = "Dragging the element " + e.target.getAttribute('id');
         e.dataTransfer.dropEffect = "move";
         e.dataTransfer.setData("text", e.target.getAttribute('id'));
