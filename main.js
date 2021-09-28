@@ -119,21 +119,22 @@ window.onload = function () {
             var pageY = (parseInt(e.target.style.top) - 50);
 
             if (detectDropOn(dropZone1, pageX, pageY)) {
-                dropZone1.appendChild(e.target);
-                e.target.style.position = "initial";
-                droppedIn = true;
-                _('app_status').innerHTML = "You droped " + e.target.getAttribute('id') + " onto " + dropZone1.id;
+                appendDropOn(dropZone1, e.target);
             } else if (detectDropOn(dropZone2, pageX, pageY)) {
-                dropZone2.appendChild(e.target);
-                e.target.style.position = "initial";
-                droppedIn = true;
-                _('app_status').innerHTML = "You droped " + e.target.getAttribute('id') + " onto " + dropZone2.id;
+                appendDropOn(dropZone2, e.target);
             } else {
                 e.target.style.left = originalX;
                 e.target.style.top = originalY;
                 _('app_status').innerHTML = "You let the " + e.target.getAttribute('id') + " go.";
             }
         }
+    }
+    
+    function appendDropOn(dropZone, target) {
+        dropZone.appendChild(target);
+        target.style.position = "initial";
+        droppedIn = true;
+        _('app_status').innerHTML = "You dropped " + target.getAttribute('id') + " onto " + dropZone.id;
     }
 
     function detectDropOn(zone, x, y) {
@@ -145,15 +146,6 @@ window.onload = function () {
         if (x - x1 > w) 
             return false;
         if (y - y1 > h) 
-            return false;
-        return true;
-    }
-
-    function detectTouchEnd(x1, y1, x2, y2, w, h) {
-        //Very simple detection here
-        if (x2 - x1 > w) 
-            return false;
-        if (y2 - y1 > h) 
             return false;
         return true;
     }
