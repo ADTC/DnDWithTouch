@@ -117,7 +117,7 @@ window.onload = function () {
         if (activeEvent === 'move') {
             var pageX = (parseInt(e.target.style.left) - 50);
             var pageY = (parseInt(e.target.style.top) - 50);
-            var coordText = " at " + pageX + ", " pageY;
+            var coordText = " at " + pageX + ", " + pageY;
 
             if (detectDropOn(dropZone1, pageX, pageY)) {
                 appendDropOn(dropZone1, e.target, coordText);
@@ -135,7 +135,7 @@ window.onload = function () {
         dropZone.appendChild(target);
         target.style.position = "initial";
         droppedIn = true;
-        _('app_status').innerHTML = "You dropped " + target.getAttribute('id') + " onto " + dropZone.id + coordText;
+        _('app_status').innerHTML = "You dropped " + target.getAttribute('id') + " on " + dropZone.id + coordText;
     }
 
     function detectDropOn(zone, x, y) {
